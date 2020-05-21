@@ -12,16 +12,17 @@ import io.ktor.response.respond
 import io.ktor.routing.Routing
 import io.ktor.routing.get
 import io.ktor.routing.route
+import io.ktor.server.netty.EngineMain
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.singleton
 import org.kodein.di.ktor.KodeinFeature
 import org.kodein.di.ktor.kodein
 
-fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
+fun main(args: Array<String>): Unit = EngineMain.main(args)
 
 @Suppress("unused") // Referenced in application.conf
-@kotlin.jvm.JvmOverloads
+@JvmOverloads
 fun Application.module(testing: Boolean = false) {
     val repo by kodein().instance<PostRepository>()
 
@@ -38,7 +39,7 @@ fun Application.module(testing: Boolean = false) {
     install(KodeinFeature) {
         bind<PostRepository>() with singleton {
             PostRepositoryInMemory().apply {
-                //TODO в примере тут указывают
+                //TODO в примере тут указывают save(postModel)
             }
         }
     }
