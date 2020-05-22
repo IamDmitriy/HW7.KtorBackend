@@ -38,3 +38,5 @@ dependencies {
 
     implementation "io.ktor:ktor-gson:1.2.4"
 }
+
+task stage(dependsOn: installDist)
